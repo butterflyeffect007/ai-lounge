@@ -1,4 +1,4 @@
-const CACHE = "ai-lounge-mockup-v1";
+const CACHE = "neural-void-mockup-v2";
 const ASSETS = [
   "./",
   "./index.html",
