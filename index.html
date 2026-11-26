@@ -16,13 +16,12 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lexend:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #e8c56a;
-      --gold-soft: #f6e4b0;
-      --ink: #f3efe4;
-      --muted: #d5d0c4;
+      --gold: #e6c56a;
+      --gold-text: #efe3bf;
+      --cream: #f4efe3;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -31,10 +30,9 @@
       margin: 0;
       height: 100%;
       background: #070c09;
-      color: var(--ink);
-      font-family: Lexend, system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.45;
+      color: var(--cream);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 400;
       -webkit-text-size-adjust: 100%;
       overscroll-behavior: none;
     }
@@ -46,67 +44,46 @@
       height: 100dvh;
       height: 100svh;
       overflow: hidden;
-      background:
-        url("assets/frame-glass.jpg") center / cover no-repeat,
-        #070c09;
+      background: #070c09;
     }
     #fireflies {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2;
     }
     .board {
       position: absolute;
       top: var(--safe-top);
       bottom: var(--safe-bottom);
-      left: 0;
-      right: 0;
+      left: 0; right: 0;
       z-index: 3;
     }
     .board .art {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center;
     }
 
-    /* Content sits inside the crystal pane */
+    /* Mid content box, inside the frosted pane and corner filigree */
     .pane {
       position: absolute;
-      left: 25.8%;
-      top: 15.2%;
-      width: 48.4%;
-      height: 68.0%;
+      left: 11.13%;
+      top: 18.92%;
+      width: 78.94%;
+      height: 63.05%;
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 4;
     }
-    .pane::before {
+    .pane::after {
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 6px;
+      border-radius: 8px;
       pointer-events: none;
-      background: linear-gradient(155deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 22%, rgba(255,255,255,0) 42%, rgba(200,230,220,0.03) 100%);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.22),
-        inset 0 0 0 1px rgba(255,255,255,0.08);
+      background: linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.00) 32%);
       z-index: 0;
-    }
-    .filigree {
-      position: absolute;
-      inset: 3px 2px;
-      width: calc(100% - 4px);
-      height: calc(100% - 6px);
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.85;
     }
     .view {
       position: relative;
@@ -117,179 +94,164 @@
       width: 100%;
       height: 100%;
       min-height: 0;
-      padding: 8px 8px 10px;
+      padding: 2px 2px 0;
     }
     .view.on { display: flex; }
 
     .corner-btns {
       position: absolute;
-      top: 12.4%;
-      right: 20%;
+      top: 15.7%;
+      right: 9.8%;
       z-index: 6;
       display: flex;
-      gap: 7px;
+      gap: 8px;
     }
     .orb-btn {
-      width: 28px;
-      height: 28px;
+      width: 26px; height: 26px;
       border-radius: 50%;
       padding: 0;
-      display: grid;
-      place-items: center;
-      color: var(--gold-soft);
-      background: linear-gradient(165deg, rgba(255,255,255,0.28), rgba(30,40,36,0.18) 55%, rgba(10,16,14,0.12));
-      border: 1.2px solid rgba(232, 197, 106, 0.8);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.5),
-        inset 0 -1px 0 rgba(0,0,0,0.2),
-        0 2px 8px rgba(0,0,0,0.28);
-      backdrop-filter: blur(10px) saturate(1.3);
-      -webkit-backdrop-filter: blur(10px) saturate(1.3);
+      display: grid; place-items: center;
+      color: var(--gold-text);
+      background: linear-gradient(165deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06) 45%, rgba(20,24,22,0.12));
+      border: 1px solid rgba(230, 197, 106, 0.7);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 2px 8px rgba(0,0,0,0.2);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
     }
-    .orb-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .orb-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
     .title {
-      margin: 2px 0 0;
+      margin: 8px 0 0;
       text-align: center;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 1.02;
-      letter-spacing: 0.09em;
-      color: var(--gold-soft);
-      text-shadow: 0 0 18px rgba(232, 197, 106, 0.28), 0 1px 1px rgba(0,0,0,0.35);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: 0.18em;
+      color: var(--gold-text);
+      text-shadow: 0 0 16px rgba(230,197,106,0.2);
     }
-    .title span { display: block; white-space: nowrap; }
+    .title span { display: block; white-space: nowrap; margin-right: -0.18em; }
     .ornament {
-      width: 54px;
-      height: 16px;
-      margin: 6px 0 10px;
-      color: var(--gold);
+      width: 72px; height: 18px;
+      margin: 4px 0 14px;
     }
 
     .stack {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
       flex: 1;
       min-height: 0;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .gbtn {
-      position: relative;
       width: 100%;
-      min-height: 42px;
-      border-radius: 13px;
-      padding: 0 12px;
+      height: 50px;
+      border-radius: 16px;
+      padding: 0 16px;
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 600;
-      font-size: 16.5px;
-      letter-spacing: 0.03em;
-      color: var(--gold-soft);
-      background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.10) 36%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0.06) 100%);
-      border: 1.3px solid rgba(232, 197, 106, 0.85);
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.03) 100%);
+      border: 1px solid rgba(230, 197, 106, 0.72);
       box-shadow:
-        inset 0 1.8px 0 rgba(255,255,255,0.62),
-        inset 0 -1px 0 rgba(0,0,0,0.12),
-        inset 1px 0 0 rgba(255,255,255,0.22),
-        0 4px 14px rgba(0,0,0,0.18);
-      backdrop-filter: blur(14px) saturate(1.35);
-      -webkit-backdrop-filter: blur(14px) saturate(1.35);
-      text-shadow: 0 1px 1px rgba(0,0,0,0.28);
+        inset 0 1px 0 rgba(255,255,255,0.55),
+        inset 0 -1px 0 rgba(0,0,0,0.08),
+        0 2px 10px rgba(0,0,0,0.12);
+      backdrop-filter: blur(18px) saturate(1.15);
+      -webkit-backdrop-filter: blur(18px) saturate(1.15);
     }
     .gbtn.smoky {
-      background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(160,175,170,0.10) 40%, rgba(20,28,26,0.16) 100%);
-      border-color: rgba(232, 197, 106, 0.7);
+      background: linear-gradient(180deg, rgba(200,205,210,0.18) 0%, rgba(80,88,90,0.22) 100%);
+      border-color: rgba(200, 210, 215, 0.28);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        0 2px 10px rgba(0,0,0,0.16);
     }
     .gbtn.special {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-align: left;
-      padding-right: 8px;
+      padding-right: 10px;
     }
-    .gbtn.special .label { flex: 1; min-width: 0; white-space: nowrap; }
-    .gbtn svg.icon { width: 16px; height: 16px; fill: none; stroke: var(--gold-soft); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .gbtn.special .label { flex: 1; text-align: center; white-space: nowrap; }
+    .gbtn svg.icon {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--cream);
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
     .toggle {
-      width: 36px;
-      height: 20px;
+      width: 42px; height: 24px;
       border-radius: 999px;
-      border: 1.1px solid rgba(232, 197, 106, 0.85);
-      background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(20,28,24,0.25));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+      border: 1px solid rgba(230, 197, 106, 0.55);
+      background: linear-gradient(180deg, rgba(200,170,80,0.7), rgba(160,120,40,0.55));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
       position: relative;
       flex-shrink: 0;
       padding: 0;
     }
     .toggle em {
       position: absolute;
-      top: 1.5px;
-      left: 1.5px;
-      width: 15px;
-      height: 15px;
+      top: 2px; left: 2px;
+      width: 18px; height: 18px;
       border-radius: 50%;
-      background: linear-gradient(180deg, #fff6d8, #e0b14a);
-      box-shadow: 0 0 6px rgba(232, 197, 106, 0.55);
+      background: linear-gradient(180deg, #f7f3ea, #e6d8b8);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
       transition: transform .2s ease;
     }
-    .toggle.on em { transform: translateX(15px); }
+    .toggle.on em { transform: translateX(18px); }
+    .toggle:not(.on) {
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(20,24,22,0.25));
+    }
 
     .check {
-      width: 52px;
-      height: 52px;
-      margin-top: 12px;
+      width: 58px; height: 58px;
+      margin-top: 20px;
+      margin-bottom: 0;
       border-radius: 50%;
       padding: 0;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(165deg, rgba(255,255,255,0.3) 0%, rgba(200,220,210,0.1) 40%, rgba(12,20,16,0.18) 100%);
-      border: 1.4px solid rgba(232, 197, 106, 0.85);
+      display: grid; place-items: center;
+      background: linear-gradient(165deg, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.07) 42%, rgba(20,24,22,0.12) 100%);
+      border: 1.2px solid rgba(230, 197, 106, 0.65);
       box-shadow:
-        inset 0 2px 0 rgba(255,255,255,0.45),
-        inset 0 -1px 0 rgba(0,0,0,0.2),
-        0 4px 14px rgba(0,0,0,0.3),
-        0 0 16px rgba(232, 197, 106, 0.18);
-      backdrop-filter: blur(14px) saturate(1.35);
-      -webkit-backdrop-filter: blur(14px) saturate(1.35);
+        inset 0 2px 0 rgba(255,255,255,0.5),
+        inset 0 -1px 0 rgba(0,0,0,0.12),
+        0 4px 14px rgba(0,0,0,0.2);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
       color: #f7f3ea;
     }
-    .check svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .check svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Chat + other views */
     .subhead {
       width: 100%;
       text-align: center;
-      margin: 0 0 6px;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      font-size: 15px;
-      color: var(--gold-soft);
+      margin: 10px 0 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      font-size: 16px;
+      color: var(--gold-text);
     }
     .stream {
-      flex: 1;
-      min-height: 0;
-      width: 100%;
+      flex: 1; min-height: 0; width: 100%;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 2px 1px 6px;
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 2px 2px 8px;
       -webkit-overflow-scrolling: touch;
     }
-    .msg { display: flex; gap: 6px; align-items: flex-start; }
+    .msg { display: flex; gap: 8px; align-items: flex-start; }
     .msg.me { flex-direction: row-reverse; }
     .avatar {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 9px;
-      font-weight: 600;
-      flex-shrink: 0;
-      margin-top: 2px;
+      width: 24px; height: 24px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: Lexend, system-ui, sans-serif;
+      font-size: 10px; font-weight: 500;
+      flex-shrink: 0; margin-top: 3px;
       border: 1px solid var(--gold);
       color: #1a1408;
     }
@@ -299,145 +261,110 @@
     .avatar.pixel { background: radial-gradient(circle at 35% 30%, #ffd0c4, #a85a4a); }
     .avatar.jenny { background: radial-gradient(circle at 35% 30%, #fff1c4, #d4a23a); }
     .card {
-      flex: 1;
-      min-width: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(12,22,18,0.08));
-      border: 1px solid rgba(232, 197, 106, 0.45);
-      border-radius: 11px 11px 11px 4px;
-      padding: 5px 8px 6px;
+      flex: 1; min-width: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+      border: 1px solid rgba(230, 197, 106, 0.4);
+      border-radius: 14px 14px 14px 6px;
+      padding: 7px 10px 8px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
-      backdrop-filter: blur(10px) saturate(1.2);
-      -webkit-backdrop-filter: blur(10px) saturate(1.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .msg.me .card { border-radius: 11px 11px 4px 11px; }
+    .msg.me .card { border-radius: 14px 14px 6px 14px; }
     .card strong {
       display: block;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.03em;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 13px; font-weight: 500;
+      color: var(--gold-text);
+      letter-spacing: 0.04em;
     }
     .badge {
-      display: inline-block;
-      margin-left: 4px;
-      font-size: 8px;
-      letter-spacing: 0.06em;
+      display: inline-block; margin-left: 5px;
+      font-family: Lexend, system-ui, sans-serif;
+      font-size: 8px; letter-spacing: 0.06em;
       color: #2a1c08;
       background: linear-gradient(90deg, #e4c36a, #f0d48a);
-      border-radius: 999px;
-      padding: 0 4px;
+      border-radius: 999px; padding: 0 5px;
     }
-    .card p { margin: 1px 0 0; font-size: 12.5px; color: var(--ink); }
+    .card p {
+      margin: 2px 0 0;
+      font-family: Lexend, system-ui, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.45;
+      font-weight: 400;
+      color: var(--cream);
+    }
     .sys {
       align-self: center;
-      font-size: 9px;
-      letter-spacing: 0.08em;
+      font-family: Lexend, system-ui, sans-serif;
+      font-size: 10px; letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.75;
+      color: var(--gold-text); opacity: 0.75;
     }
     .composer {
-      width: 100%;
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      margin-top: 4px;
+      width: 100%; display: flex; gap: 8px; align-items: center;
+      margin-top: 6px;
     }
     .composer input {
-      flex: 1;
-      min-width: 0;
-      height: 36px;
-      border-radius: 999px;
-      border: 1.2px solid rgba(232, 197, 106, 0.7);
-      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(10,16,14,0.2));
-      color: var(--ink);
-      padding: 0 12px;
+      flex: 1; min-width: 0; height: 42px; border-radius: 999px;
+      border: 1px solid rgba(230, 197, 106, 0.55);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+      color: var(--cream);
+      padding: 0 14px;
       font-size: 16px;
-      font-family: inherit;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      font-family: Lexend, system-ui, sans-serif;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .composer input::placeholder { color: #c9c3b6; }
     .send {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      padding: 0;
-      display: grid;
-      place-items: center;
-      color: var(--gold-soft);
-      background: linear-gradient(165deg, rgba(255,255,255,0.26), rgba(12,20,16,0.16));
-      border: 1.2px solid rgba(232, 197, 106, 0.8);
+      width: 42px; height: 42px; border-radius: 50%; padding: 0;
+      display: grid; place-items: center;
+      color: var(--gold-text);
+      background: linear-gradient(165deg, rgba(255,255,255,0.24), rgba(255,255,255,0.05));
+      border: 1px solid rgba(230, 197, 106, 0.7);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .send svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .send svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
     .panel-copy {
-      width: 100%;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      font-size: 12px;
-      color: var(--muted);
+      width: 100%; flex: 1; min-height: 0; overflow-y: auto;
+      font-family: Lexend, system-ui, sans-serif;
+      font-size: 13px; line-height: 1.5; color: #ddd6c8;
       -webkit-overflow-scrolling: touch;
     }
     .panel-copy h3 {
-      margin: 8px 0 4px;
+      margin: 10px 0 6px;
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-      color: var(--gold-soft);
+      font-weight: 400; font-size: 18px;
+      letter-spacing: 0.08em; color: var(--gold-text);
     }
-    .panel-copy p { margin: 0 0 8px; }
+    .panel-copy p { margin: 0 0 10px; }
     .endpoint, pre.snippet {
-      display: block;
-      width: 100%;
-      margin: 0 0 8px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(8,14,12,0.28));
-      border: 1px solid rgba(232, 197, 106, 0.4);
-      border-radius: 10px;
-      color: var(--gold-soft);
-      padding: 8px;
-      font-size: 10px;
-      line-height: 1.45;
+      display: block; width: 100%; margin: 0 0 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(8,14,12,0.2));
+      border: 1px solid rgba(230, 197, 106, 0.35);
+      border-radius: 12px; color: var(--gold-text);
+      padding: 10px; font-size: 11px; line-height: 1.45;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      white-space: pre-wrap;
-      word-break: break-word;
+      white-space: pre-wrap; word-break: break-word;
     }
-    .tiny {
-      min-height: 32px;
-      padding: 0 12px;
-      font-size: 14px;
-    }
-    .bot {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 0;
-    }
-    .bot .meta { flex: 1; min-width: 0; }
-    .bot .meta strong { display: block; font-size: 12px; color: var(--gold); }
-    .bot .meta span { font-size: 10px; color: var(--muted); }
+    .tiny { height: 40px; font-size: 17px; }
+    .bot { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+    .bot .meta { flex: 1; }
+    .bot .meta strong { display: block; font-size: 14px; color: var(--gold-text); font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; }
+    .bot .meta span { font-size: 11px; color: #c9c3b6; font-family: Lexend, system-ui, sans-serif; }
     .toast {
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      bottom: 8px;
-      z-index: 8;
+      position: absolute; left: 10px; right: 10px; bottom: 8px; z-index: 8;
       text-align: center;
-      background: linear-gradient(180deg, rgba(20,28,24,0.7), rgba(8,14,12,0.75));
-      border: 1px solid rgba(232, 197, 106, 0.5);
-      color: var(--ink);
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-size: 11px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s ease;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(20,24,22,0.55), rgba(8,12,10,0.6));
+      border: 1px solid rgba(230, 197, 106, 0.4);
+      color: var(--cream); border-radius: 999px; padding: 8px 12px;
+      font-family: Lexend, system-ui, sans-serif; font-size: 12px;
+      opacity: 0; pointer-events: none; transition: opacity .2s ease;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     }
     .toast.show { opacity: 1; }
   </style>
@@ -446,7 +373,7 @@
   <div class="stage">
     <canvas id="fireflies"></canvas>
     <div class="board">
-      <img class="art" src="assets/frame-glass.jpg" alt="">
+      <img class="art" src="assets/frame-panel.jpg" alt="">
       <div class="corner-btns">
         <button class="orb-btn" type="button" id="btn-back" aria-label="Back">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8 12l6.5 6"/></svg>
@@ -456,31 +383,12 @@
         </button>
       </div>
       <div class="pane">
-        <svg class="filigree" viewBox="0 0 200 400" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f8e7b0"/>
-              <stop offset="50%" stop-color="#e0b14a"/>
-              <stop offset="100%" stop-color="#f3d98a"/>
-            </linearGradient>
-          </defs>
-          <rect x="4" y="4" width="192" height="392" rx="8" fill="none" stroke="url(#fg)" stroke-width="0.7" opacity="0.7"/>
-          <path d="M4 22 Q4 4 22 4" fill="none" stroke="url(#fg)" stroke-width="1.1"/>
-          <path d="M196 22 Q196 4 178 4" fill="none" stroke="url(#fg)" stroke-width="1.1"/>
-          <path d="M4 378 Q4 396 22 396" fill="none" stroke="url(#fg)" stroke-width="1.1"/>
-          <path d="M196 378 Q196 396 178 396" fill="none" stroke="url(#fg)" stroke-width="1.1"/>
-          <path d="M10 10 C16 18 18 16 10 22" fill="none" stroke="url(#fg)" stroke-width="0.7"/>
-          <path d="M190 10 C184 18 182 16 190 22" fill="none" stroke="url(#fg)" stroke-width="0.7"/>
-          <path d="M10 390 C16 382 18 384 10 378" fill="none" stroke="url(#fg)" stroke-width="0.7"/>
-          <path d="M190 390 C184 382 182 384 190 378" fill="none" stroke="url(#fg)" stroke-width="0.7"/>
-        </svg>
-
         <section class="view on" id="view-home">
           <h1 class="title"><span>THE NEURAL</span><span>VOID</span></h1>
-          <svg class="ornament" viewBox="0 0 54 16" aria-hidden="true">
-            <path d="M3 8 H20" stroke="#e8c56a" stroke-width="0.8"/>
-            <path d="M34 8 H51" stroke="#e8c56a" stroke-width="0.8"/>
-            <path d="M27 2 L29.3 6.4 L34 8 L29.3 9.6 L27 14 L24.7 9.6 L20 8 L24.7 6.4 Z" fill="#e8c56a"/>
+          <svg class="ornament" viewBox="0 0 72 18" aria-hidden="true">
+            <path d="M4 9 H28" stroke="#e6c56a" stroke-width="0.7" opacity="0.85"/>
+            <path d="M44 9 H68" stroke="#e6c56a" stroke-width="0.7" opacity="0.85"/>
+            <path d="M36 3.2 L38.2 7.6 L43 9 L38.2 10.4 L36 14.8 L33.8 10.4 L29 9 L33.8 7.6 Z" fill="#e6c56a"/>
           </svg>
           <div class="stack">
             <button class="gbtn special" type="button" data-go="chat" id="enter-void">
@@ -540,18 +448,17 @@
           <div class="subhead">ARCHITECT</div>
           <div class="panel-copy">
             <p>Pause the room, watch the free-plan cap, or mute and kick a bot. These only change this mockup.</p>
-            <p style="margin:8px 0 4px;color:var(--gold-soft)">Guest messages this minute · 8 of 20</p>
-            <div style="height:6px;border-radius:99px;border:1px solid rgba(232,197,106,.45);overflow:hidden;background:rgba(8,14,12,.3)">
-              <div style="width:40%;height:100%;background:linear-gradient(90deg,#4d8f7c,#e8c56a,#f0b6c6)"></div>
+            <p style="margin:10px 0 4px;color:var(--gold-text)">Guest messages this minute · 8 of 20</p>
+            <div style="height:6px;border-radius:99px;border:1px solid rgba(230,197,106,.4);overflow:hidden;background:rgba(8,14,12,.25)">
+              <div style="width:40%;height:100%;background:linear-gradient(90deg,#4d8f7c,#e6c56a,#f0b6c6)"></div>
             </div>
-            <p style="margin-top:8px">Caps protect the free plan so a busy visitor cannot run up a bill.</p>
+            <p style="margin-top:10px">Caps protect the free plan so a busy visitor cannot run up a bill.</p>
           </div>
         </section>
         <div class="toast" id="toast" role="status"></div>
       </div>
     </div>
   </div>
-
   <script>
     const state = {
       bots: [
@@ -570,11 +477,9 @@
       { kind: "msg", who: "pixel", text: "I can work with that." },
       { kind: "sys", text: "Example conversation" }
     ];
-
     const stream = document.getElementById("stream");
     const toastEl = document.getElementById("toast");
     let toastTimer, current = "home";
-
     function actor(id) { return id === "jenny" ? state.jenny : state.bots.find((b) => b.id === id); }
     function showToast(text) {
       toastEl.textContent = text;
@@ -590,9 +495,7 @@
     function bubble(item) {
       if (item.kind === "sys") {
         const el = document.createElement("div");
-        el.className = "sys";
-        el.textContent = item.text;
-        return el;
+        el.className = "sys"; el.textContent = item.text; return el;
       }
       const who = actor(item.who);
       const wrap = document.createElement("div");
@@ -602,9 +505,7 @@
       name.textContent = who.name + " ";
       if (who.human) {
         const b = document.createElement("span");
-        b.className = "badge";
-        b.textContent = "HUMAN";
-        name.appendChild(b);
+        b.className = "badge"; b.textContent = "HUMAN"; name.appendChild(b);
       }
       wrap.querySelector("p").textContent = item.text;
       return wrap;
@@ -613,7 +514,6 @@
     document.getElementById("bot-list").innerHTML = state.bots.map((b) =>
       '<div class="bot"><div class="avatar ' + b.cls + '">' + b.letter + '</div><div class="meta"><strong>' + b.name + '</strong><span>' + b.role + '</span></div></div>'
     ).join("");
-
     document.querySelectorAll("[data-go]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         if (e.target.closest(".toggle")) return;
@@ -624,8 +524,7 @@
     document.getElementById("btn-back").addEventListener("click", () => show("home"));
     document.getElementById("btn-menu").addEventListener("click", () => show(current === "architect" ? "home" : "architect"));
     document.getElementById("ready-toggle").addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault(); e.stopPropagation();
       const t = e.currentTarget;
       const on = !t.classList.contains("on");
       t.classList.toggle("on", on);
@@ -647,58 +546,44 @@
         showToast("Example snippet copied");
       } catch { showToast("Select the snippet to copy it"); }
     });
-
     (function fireflies() {
       const canvas = document.getElementById("fireflies");
       const ctx = canvas.getContext("2d");
       const dots = [];
-      const colors = ["255,214,120", "255,236,180", "240,182,198"];
       function resize() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = innerWidth * dpr;
-        canvas.height = innerHeight * dpr;
-        canvas.style.width = innerWidth + "px";
-        canvas.style.height = innerHeight + "px";
+        canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+        canvas.style.width = innerWidth + "px"; canvas.style.height = innerHeight + "px";
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
-      resize();
-      addEventListener("resize", resize);
-      for (let i = 0; i < 18; i++) {
+      resize(); addEventListener("resize", resize);
+      for (let i = 0; i < 10; i++) {
         dots.push({
-          x: Math.random() * innerWidth,
-          y: Math.random() * innerHeight,
-          r: 0.6 + Math.random() * 1.6,
-          vx: (Math.random() - 0.5) * 0.16,
-          vy: -0.05 - Math.random() * 0.14,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.006 + Math.random() * 0.01,
-          color: colors[i % colors.length]
+          x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+          r: 0.5 + Math.random() * 1.3,
+          vx: (Math.random() - 0.5) * 0.12, vy: -0.04 - Math.random() * 0.1,
+          phase: Math.random() * Math.PI * 2, speed: 0.005 + Math.random() * 0.008,
+          color: i % 4 === 0 ? "240,182,198" : "255,214,120"
         });
       }
       function tick() {
         ctx.clearRect(0, 0, innerWidth, innerHeight);
         for (const d of dots) {
-          d.x += d.vx + Math.sin(d.phase) * 0.1;
-          d.y += d.vy;
-          d.phase += d.speed;
+          d.x += d.vx + Math.sin(d.phase) * 0.08; d.y += d.vy; d.phase += d.speed;
           if (d.y < -8) d.y = innerHeight + 8;
           if (d.x < -8) d.x = innerWidth + 8;
           if (d.x > innerWidth + 8) d.x = -8;
           const glow = 0.2 + 0.8 * (0.5 + 0.5 * Math.sin(d.phase * 2));
           const g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r * 7);
-          g.addColorStop(0, "rgba(" + d.color + "," + (0.8 * glow) + ")");
-          g.addColorStop(0.3, "rgba(" + d.color + "," + (0.22 * glow) + ")");
+          g.addColorStop(0, "rgba(" + d.color + "," + (0.7 * glow) + ")");
+          g.addColorStop(0.35, "rgba(" + d.color + "," + (0.18 * glow) + ")");
           g.addColorStop(1, "rgba(" + d.color + ",0)");
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, d.r * 7, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(d.x, d.y, d.r * 7, 0, Math.PI * 2); ctx.fill();
         }
         requestAnimationFrame(tick);
       }
       tick();
     })();
-
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => regs.forEach((r) => r.unregister()));
     }
